@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.service.ILocationMapService;
+import com.service.IContractorService;
  
 /**
 *
@@ -24,7 +24,7 @@ import com.service.ILocationMapService;
 public class SearchNearController {
 private  final Logger logger = LoggerFactory.getLogger(SearchNearController.class);
 @Autowired
-ILocationMapService service;
+IContractorService service;
 
  
 @RequestMapping(value="/{lat}/{longit}/{nearby}",method = RequestMethod.GET)
