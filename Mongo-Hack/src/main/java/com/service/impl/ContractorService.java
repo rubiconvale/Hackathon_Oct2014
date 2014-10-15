@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.crsh.shell.impl.command.system.help;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -17,11 +16,15 @@ import org.springframework.stereotype.Service;
 
 import com.dao.IReviewsRepositoryDao;
 import com.model.Contractor;
+import com.model.ContractorDTO;
+import com.model.IContractor;
+import com.model.ZipCOde;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.CommandResult;
 import com.mongodb.DBObject;
 import com.service.IContractorService;
+
 
 @Service("locationMapService")
 public class ContractorService implements IContractorService {
@@ -56,49 +59,123 @@ MongoTemplate mongoTemplate;
 		
 	}
 
-	public List<Contractor> findAllContractors() {
+	public List<ContractorDTO> findAllContractors() {
 
-		return mongoTemplate.findAll(Contractor.class);
+		return mongoTemplate.findAll(ContractorDTO.class);
 	}
 
 	public void delete(Contractor contractor) {
 		
 	}
 
-	public void find(Contractor contractor) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 
-	public List<Contractor> searchContractorByCriteria(List<String> trades, Integer rating){
+	public List<ContractorDTO> searchContractorByCriteria(List<String> trades, Integer rating, Integer zipCode){
+		
+		String city=null;
+		String state=null;
+					
+		if(zipCode!=null){
+			Query zq=new Query(Criteria.where("id").is(zipCode));
+			ZipCOde z=mongoTemplate.findOne(zq, ZipCOde.class);
+			if(z!=null){
+				city=z.getCity();
+				state=z.getState();
+			}
+		}
 		if(CollectionUtils.isNotEmpty(trades) && rating!=null){
 
-			TypedAggregation<Contractor> aggregation = Aggregation.newAggregation(Contractor.class,
-					Aggregation.match(Criteria.where("trades").in(trades)),
-		            Aggregation.group("id").avg("reviews.rating").as("avg"),
-		            Aggregation.match(Criteria.where("avg").gte(rating)));
+			TypedAggregation<ContractorDTO> aggregation = Aggregation.newAggregation(ContractorDTO.class,
+					Aggregation.unwind("reviews"), 
+		            Aggregation.group("id").avg("reviews.rating").as("avgRating"),
+		            Aggregation.match(Criteria.where("avgRating").gte(rating)),
+		            Aggregation.sort(Direction.DESC, "avgRating"));
 
-			String queryString=new Query(Criteria.where("trades").in(trades)).toString();
+			String queryString=aggregation.toString();
 			System.out.println(" Query String : "+queryString);
-			AggregationResults<Contractor> agResults= mongoTemplate.aggregate(aggregation,Contractor.class);
-			return agResults.getMappedResults();		
+			AggregationResults<ContractorDTO> agResults= mongoTemplate.aggregate(aggregation,ContractorDTO.class);
+
+			for (ContractorDTO d:agResults.getMappedResults()){
+				Query q=new Query(Criteria.where("trades").in(trades).and("zipCode").is(zipCode));
+				IContractor u=mongoTemplate.findOne(q, Contractor.class);
+
+				if(u==null){d=null; break;}
+
+				d.setBusinessName(((Contractor)u).getBusinessName());
+				d.setLatitute(((Contractor)u).getLatitute());
+				d.setLocation(((Contractor)u).getLocation());
+				d.setLogitute(((Contractor)u).getLogitute());
+				d.setName(((Contractor)u).getName());
+				d.setReviews(((Contractor)u).getReviews());
+				d.setTrades(((Contractor)u).getTrades());
+				d.setAddress(((Contractor)u).getAddress());
+				d.setCity(city);
+				d.setState(state);
+			}
+			return agResults.getMappedResults();
 		}
 		if(CollectionUtils.isNotEmpty(trades)){
-//			TypedAggregation<Contractor> aggregation = Aggregation.newAggregation(Contractor.class,
-//		            Aggregation.match(Criteria.where("avg").gte(rating)),
-//		            Aggregation.group("id").avg("reviews.rating").as("avg"),
-//		            Aggregation.sort(Direction.DESC, Aggregation.previousOperation()));
-//
-//			String queryString=new Query(Criteria.where("trades").in(trades)).toString();
-//			System.out.println(" Query String : "+queryString);
-//			AggregationResults<Contractor> agResults= mongoTemplate.aggregate(aggregation,Contractor.class);
-//			return agResults.getMappedResults();
+			TypedAggregation<ContractorDTO> aggregation = Aggregation.newAggregation(ContractorDTO.class,
+					Aggregation.unwind("reviews"), 
+		            Aggregation.group("id").avg("reviews.rating").as("avgRating"),
+		            Aggregation.sort(Direction.DESC, "avgRating"));
+
+			String queryString=aggregation.toString();
+			System.out.println(" Query String : "+queryString);
+			
+			AggregationResults<ContractorDTO> agResults= mongoTemplate.aggregate(aggregation,ContractorDTO.class);
+
+			for (ContractorDTO d:agResults.getMappedResults()){
+				Query q=new Query(Criteria.where("trades").in(trades).and("id").is(d.getId()).and("zipCode").is(zipCode));
+				IContractor u=mongoTemplate.findOne(q, Contractor.class);
+				if(u==null){d=null;break;}
+				d.setBusinessName(((Contractor)u).getBusinessName());
+				d.setLatitute(((Contractor)u).getLatitute());
+				d.setLocation(((Contractor)u).getLocation());
+				d.setLogitute(((Contractor)u).getLogitute());
+				d.setName(((Contractor)u).getName());
+				d.setReviews(((Contractor)u).getReviews());
+				d.setTrades(((Contractor)u).getTrades());
+				d.setAddress(((Contractor)u).getAddress());
+				d.setCity(city);
+				d.setState(state);
+			}
+			return agResults.getMappedResults();
 			
 		}
 		if(rating!=null){
+			TypedAggregation<ContractorDTO> aggregation = Aggregation.newAggregation(ContractorDTO.class,
+					Aggregation.unwind("reviews"), 
+		            Aggregation.group("id").avg("reviews.rating").as("avgRating"),
+		            Aggregation.match(Criteria.where("avgRating").gte(rating)),
+		            Aggregation.sort(Direction.DESC, "avgRating"));
 
+			String queryString=aggregation.toString();
+			System.out.println(" Query String : "+queryString);
+			AggregationResults<ContractorDTO> agResults= mongoTemplate.aggregate(aggregation,ContractorDTO.class);
+
+			for (ContractorDTO d:agResults.getMappedResults()){
+				Query q=new Query(Criteria.where("id").is(d.getId()).and("zipCode").is(zipCode));
+				IContractor u=mongoTemplate.findOne(q, Contractor.class);				
+
+				d.setBusinessName(((Contractor)u).getBusinessName());
+				d.setLatitute(((Contractor)u).getLatitute());
+				d.setLocation(((Contractor)u).getLocation());
+				d.setLogitute(((Contractor)u).getLogitute());
+				d.setName(((Contractor)u).getName());
+				d.setReviews(((Contractor)u).getReviews());
+				d.setTrades(((Contractor)u).getTrades());
+				d.setAddress(((Contractor)u).getAddress());
+				d.setCity(city);
+				d.setState(state);
+			}
+			return agResults.getMappedResults();
 		}		
+		return null ;
+	}
+
+	public ContractorDTO find(Contractor contractor) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
