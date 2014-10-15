@@ -15,27 +15,44 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 
     <!-- Bootstrap -->
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <%--<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">--%>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+      <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
     <![endif]-->
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.rateit.js"></script>
     <!-- Add fancyBox -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $(".fancybox").fancybox();
-      });
-    </script>
+      <script type="text/javascript">
+          $(document).ready(function() {
+              $(".various").fancybox({
+                  fitToView : false,
+                  width   : 1050,
+                  height    : 620,
+                  autoSize  : false,
+                  closeClick  : false,
+                  openEffect  : 'none',
+                  closeEffect : 'none'
+              });
+
+              $('.fancybox-media').fancybox({
+                  openEffect  : 'none',
+                  closeEffect : 'none',
+                  helpers : {
+                      media : {}
+                  }
+              });
+
+          });
+      </script>
 
   </head>
   <body>
@@ -84,7 +101,7 @@
                 <div class="stars-rating">
                     <div class="stars-inner">${contractor.avgRating}</div>
                     <div class="verified-reviews">
-                      <a class="fancybox" href="file:///Users/ca00456-mb/Documents/HACKATHON/ContractorReviews/RateContractor.html">Write a Review</a>
+                      <a class="various fancybox.iframe" href="file:///Users/ca00456-mb/Documents/HACKATHON/ContractorReviews/RateContractor.html">Write a Review</a>
                     </div>
                 </div>
               </div>
