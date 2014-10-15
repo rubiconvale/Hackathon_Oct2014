@@ -2,7 +2,6 @@ package com.model;
 
  
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,14 +13,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
  
 
 @Document(collection = "contractor")
-public class Contractor implements Serializable, IContractor {
+public class Contractor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 @Id
 private String id;
 private String name;
 private String businessName;
-private List<Review> reviews=new ArrayList<Contractor.Review>();
+private List<Review> reviews;
 private List<String> trades;
 @GeoSpatialIndexed
 private double[] location;
@@ -30,15 +29,6 @@ private double latitute;
 @Transient
 private double logitute;
  
-private Integer zipCode;
-
-private String phoneNo;
-
-private String contactName;
-
-private String address;
-
-
 public double getLatitute() {
 if (location!=null  )
 {
@@ -119,37 +109,7 @@ public List<Review> getReviews() {
 public void setReviews(List<Review> reviews) {
 	this.reviews = reviews;
 }
-public Integer getZipCode() {
-	return zipCode;
-}
 
-public void setZipCode(Integer zipCode) {
-	this.zipCode = zipCode;
-}
-public String getAddress() {
-	return address;
-}
-
-public void setAddress(String address) {
-	this.address = address;
-}
-public String getPhoneNo() {
-	return phoneNo;
-}
-
-public void setPhoneNo(String phoneNo) {
-	this.phoneNo = phoneNo;
-}
-
-public String getContactName() {
-	return contactName;
-}
-
-public void setContactName(String contactName) {
-	this.contactName = contactName;
-}
-
-@Document
 public class Review implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String author;
@@ -186,6 +146,4 @@ public class Review implements Serializable{
 	    return  ReflectionToStringBuilder.toString(this);
 	}
 }
-
-
 }
