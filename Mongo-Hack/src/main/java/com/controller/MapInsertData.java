@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dao.IReviewsRepositoryDao;
 import com.model.Contractor;
 
-/**
- *
- * @author home
- */
+
 @Controller
 @RequestMapping(value = "/mapinsert")
 public class MapInsertData {
@@ -30,7 +27,7 @@ public class MapInsertData {
 	public String getCreateForm(Model model) {
 
 		model.addAttribute("locationbean", new Contractor());
-		return "basic/mapinsert";
+		return "mapinsert";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
