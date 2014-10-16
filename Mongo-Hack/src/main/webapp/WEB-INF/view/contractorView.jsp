@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -126,6 +127,7 @@ var markers = [];
     </div>
 </header>
 
+<form:form method="POST" action="/Mongo-Hack/searchContractor" modelAttribute="input">
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -136,34 +138,35 @@ var markers = [];
                 <!-- Utility Box-->
                 <div class="utility-box listing-criteria-block-top">
                     <div class="l-left col-md-9">
-                        <form id="trades-form" action="" method="post">
+
                             <select name="trades" class="form-control select2Min">
                                 <option value="0">Drilling</option>
                                 <option value="1">Welding</option>
                                 <option value="2">Masonry</option>
                                 <option value="3">Painting</option>
                             </select>
+							<form:label path="zipCode">zip code</form:label>
+                            <form:input path="zipCode" cssClass="input-text" maxlength="5" ></form:input>
 
-                            <input id="zip" class="input-text" placeholder="Enter ZIP" validate="zip" type="text"
-                                   value="" maxlength="5">
 
-                            <button id="change-service" class="btn btn-default btn-xs" name="search"
+
+                    </div>
+                    <div class="l-right col-md-3">
+
+                            <form:label path="rating">Filter By:</form:label><form:select path="rating" cssClass="form-control-sortBy">
+                                <option value="5">5-Star</option>
+                                <option value="4">4-Star</option>
+                                <option value="3">3-Star</option>
+                                <option value="2">2-Star</option>
+                                <option value="1">1-Star</option>
+                           </form:select>
+
+                    </div>
+                   <div class="l-right col-md-3">
+                         <button id="change-service" class="btn btn-default btn-xs" name="search"
                                     class="button-standard button-small">
                                 Search
                             </button>
-                        </form>
-                    </div>
-                    <div class="l-right col-md-3">
-                        <form id="rating-form" action="" method="post" name="">
-                            <label for="sortBy">Sort By:</label>
-                            <select id="sortBy" class="form-control-sortBy" name="sortBy" onchange="">
-                                <option value="0">5-Star</option>
-                                <option value="1">4-Star</option>
-                                <option value="2">3-Star</option>
-                                <option value="3">2-Star</option>
-                                <option value="4">1-Star</option>
-                            </select>
-                        </form>
                     </div>
                 </div>
 
@@ -251,7 +254,7 @@ var markers = [];
     </div>
 </div>
 
-
+</form:form>
 
 
 </body>
