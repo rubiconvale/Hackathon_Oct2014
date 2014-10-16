@@ -18,76 +18,76 @@
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKqxSWB8GcQPSn61zFa73d3bgJ6BjCebc">
     </script>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
 
 
+        function initialize() {
+            var center = new google.maps.LatLng(33.655781, -117.778931);
 
-function initialize() {
-var center = new google.maps.LatLng(33.655781, -117.778931);
+            var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                zoom: 10,
+                center: center,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
 
-var map = new google.maps.Map(document.getElementById('map-canvas'), {
-zoom: 10,
-center: center,
-mapTypeId: google.maps.MapTypeId.ROADMAP
-});
+            var latArray = [];
+            var x = $.makeArray($('.lat'));
+            $.each(x, function (index, value) {
+                latArray.push(parseFloat(value.innerText));
+            });
 
-var latArray = [];
-var x = $.makeArray($('.lat'));
-$.each(x, function(index, value){
-	latArray.push(parseFloat(value.innerText));
-});
+            var longArray = [];
+            var y = $.makeArray($('.long'));
+            $.each(y, function (index, value) {
+                longArray.push(parseFloat(value.innerText));
+            });
+            var nameArray = [];
+            var x = $.makeArray($('.name'));
+            $.each(x, function (index, value) {
+                nameArray.push(value.innerText);
+            });
 
-var longArray = [];
-var y = $.makeArray($('.long'));
-$.each(y, function(index, value){
-	longArray.push(parseFloat(value.innerText));
-});
-var nameArray = [];
-var x = $.makeArray($('.name'));
-$.each(x, function(index, value){
-	nameArray.push(value.innerText);
-});
+            var ratingArray = [];
+            var y = $.makeArray($('.rating'));
+            $.each(y, function (index, value) {
+                ratingArray.push(parseFloat(value.innerText));
+            });
 
-var ratingArray = [];
-var y = $.makeArray($('.rating'));
-$.each(y, function(index, value){
-	ratingArray.push(parseFloat(value.innerText));
-});
+            var markers = [];
+            for (var i = 0; i < latArray.length; i++) {
+                var myLat = latArray[i];
+                var myLong = longArray[i];
+                var myName = nameArray[i];
+                var myRating = ratingArray[i];
 
-var markers = [];
-  for (var i = 0; i < latArray.length; i++) {
-          var myLat = latArray[i];
-          var myLong = longArray[i];
-          var myName=nameArray[i];
-          var myRating= ratingArray[i];
-
-          var latLng = new google.maps.LatLng(myLat,myLong);
-          var marker = new google.maps.Marker({map: map,         position: latLng});
-          var avgStars=widthOfDisplay(i,myRating);
-          console.log("rating "+myRating +"stars : "+ avgStars);
-          var infowindow = new google.maps.InfoWindow({
-        	  content:"<div>"+myName+"</div><div id='"+i+"' class='stars-inner' style='width:"+avgStars+"'></div>"
-        	  });
-          infowindow.open(map,marker);
-          markers.push(marker);
+                var latLng = new google.maps.LatLng(myLat, myLong);
+                var marker = new google.maps.Marker({map: map, position: latLng});
+                var avgStars = widthOfDisplay(i, myRating);
+                console.log("rating " + myRating + "stars : " + avgStars);
+                var infowindow = new google.maps.InfoWindow({
+                    content: "<div>" + myName + "</div><div id='" + i + "' class='stars-inner' style='width:" + avgStars + "'></div>"
+                });
+                infowindow.open(map, marker);
+                markers.push(marker);
+            }
         }
-      };
+        ;
 
-      google.maps.event.addDomListener(window, 'load', initialize);
-      function widthOfDisplay(id,star) {
-			console.log("id : "+id);
-  	  return  widthOfRating=star*16+"px";
-    }
-      function starDisplay(id,star) {
-			console.log("id : "+id);
-    	  var widthOfRating=star*16;
-    	  $('#'+id).css('width', widthOfRating+'px');
+        google.maps.event.addDomListener(window, 'load', initialize);
+        function widthOfDisplay(id, star) {
+            console.log("id : " + id);
+            return  widthOfRating = star * 16 + "px";
+        }
+        function starDisplay(id, star) {
+            console.log("id : " + id);
+            var widthOfRating = star * 16;
+            $('#' + id).css('width', widthOfRating + 'px');
 
-      }
+        }
     </script>
 </head>
 
@@ -101,24 +101,24 @@ var markers = [];
                     <a class="navbar-brand" href="/">Dashboard</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="dropdown ">
-                        <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Company</a>
-                    </li>
-                    <li class="dropdown ">
-                        <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Reports</a>
-                    </li>
-                    <li class="dropdown ">
-                        <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Manage</a>
-                    </li>
-                    <li class="dropdown ">
-                        <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Configure</a>
-                    </li>
-                    <li class="dropdown ">
-                        <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Dev</a>
-                    </li>
-                    <li class="dropdown ">
-                        <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Support</a>
-                    </li>
+                    <%--<li class="dropdown ">--%>
+                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Company</a>--%>
+                    <%--</li>--%>
+                    <%--<li class="dropdown ">--%>
+                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Reports</a>--%>
+                    <%--</li>--%>
+                    <%--<li class="dropdown ">--%>
+                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Manage</a>--%>
+                    <%--</li>--%>
+                    <%--<li class="dropdown ">--%>
+                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Configure</a>--%>
+                    <%--</li>--%>
+                    <%--<li class="dropdown ">--%>
+                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Dev</a>--%>
+                    <%--</li>--%>
+                    <%--<li class="dropdown ">--%>
+                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Support</a>--%>
+                    <%--</li>--%>
                 </ul>
             </nav>
 
@@ -133,39 +133,47 @@ var markers = [];
 
             <div class="content-main">
 
-                <!-- Utility Box-->
-                <div class="utility-box listing-criteria-block-top">
-                    <div class="l-left col-md-9">
-                        <form id="trades-form" action="" method="post">
-                            <select name="trades" class="form-control select2Min">
-                                <option value="0">Drilling</option>
-                                <option value="1">Welding</option>
-                                <option value="2">Masonry</option>
-                                <option value="3">Painting</option>
+                <form name="input" action="/Mongo-Hack/searchContractor" method="GET">
+                    <!-- Utility Box-->
+                    <div class="utility-box listing-criteria-block-top">
+                        <div class="l-left col-md-9">
+                            <select name="trade" class="form-control select2Min" onchange="this.form.submit()">
+                                <option value="DRILLING" ${'DRILLING' == input.trade ? 'selected': ''}>Drilling
+                                </option>
+                                <option value="WELDING" ${'WELDING' == input.trade ? 'selected': ''}>Welding
+                                </option>
+                                <option value="MASONRY" ${'MASONRY' == input.trade ? 'selected': ''}>Masonry
+                                </option>
+                                <option value="PAINTING" ${'PAINTING' == input.trade ? 'selected': ''}>Painting
+                                </option>
+                                <option value="ELECTRICIAN" ${'ELECTRICIAN' == input.trade ? 'selected': ''}>
+                                    Electrician
+                                </option>
+                                <option value="JANITORIAL" ${'JANITORIAL' == input.trade ? 'selected': ''}>
+                                    Janitorial
+                                </option>
                             </select>
 
                             <input id="zip" class="input-text" placeholder="Enter ZIP" validate="zip" type="text"
-                                   value="" maxlength="5">
+                                   value="${input.zipCode}" maxlength="5" name="zipCode">
 
-                            <button id="change-service" class="btn btn-default btn-xs" name="search"
-                                    class="button-standard button-small">
+                            <button id="change-service" class="btn btn-default btn-xs"
+                                    class="button-standard button-small" type="submit">
                                 Search
                             </button>
-                        </form>
-                    </div>
-                    <div class="l-right col-md-3">
-                        <form id="rating-form" action="" method="post" name="">
-                            <label for="sortBy">Sort By:</label>
-                            <select id="sortBy" class="form-control-sortBy" name="sortBy" onchange="this.form.submit()">
-                                <option value="0">5-Star</option>
-                                <option value="1">4-Star</option>
-                                <option value="2">3-Star</option>
-                                <option value="3">2-Star</option>
-                                <option value="4">1-Star</option>
+                        </div>
+                        <div class="l-right col-md-3">
+                            <label for="rating">Filter By:</label>
+                            <select id="rating" name="rating" class="form-control-sortBy" onchange="this.form.submit()">
+                                <option value="5" ${5 == input.rating ? 'selected' : ''}>5-Star</option>
+                                <option value="4" ${4 == input.rating ? 'selected' : ''}>4-Star</option>
+                                <option value="3" ${3 == input.rating ? 'selected' : ''}>3-Star</option>
+                                <option value="2" ${2 == input.rating ? 'selected' : ''}>2-Star</option>
+                                <option value="1" ${1 == input.rating ? 'selected' : ''}>1-Star</option>
                             </select>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Separator -->
                 <div class="featured-separator">FEATURED</div>
@@ -176,13 +184,15 @@ var markers = [];
 
                         <div class="listing utility-box">
                             <div>
-                                <%--<h4 class="col-md-12 c-title">${contractor.name}</h4>--%>
+                                    <%--<h4 class="col-md-12 c-title">${contractor.name}</h4>--%>
 
-                                    <h4 class="col-md-12 c-title">${contractor.name}</h4>
+                                <h4 class="col-md-12 c-title">${contractor.name}</h4>
 
                                 <div class="col-md-3">
                                     <div class="stars-rating">
-                                        <div id="${contractor.id}" class="stars-inner"><script type="text/javascript">starDisplay("${contractor.id}",${contractor.avgRating})</script></div>
+                                        <div id="${contractor.id}" class="stars-inner">
+                                            <script type="text/javascript">starDisplay("${contractor.id}", ${contractor.avgRating})</script>
+                                        </div>
                                     </div>
                                     <div class="verified-reviews">
                                         <a href="#">Reviews</a>
@@ -196,14 +206,14 @@ var markers = [];
                                     <p>${contractor.city}, ${contractor.state} ${contractor.zipCode}</p>
 
                                     <div></div>
-       									<div class="lat" style="display: none;">${contractor.latitute}</div>
-    									<div class="long"  style="display: none;">${contractor.logitute}</div>
-    									<div class="name"  style="display: none;">${contractor.name}</div>
-    									<div class="rating"  style="display: none;">${contractor.avgRating}</div>
-                                   </div>
+                                    <div class="lat" style="display: none;">${contractor.latitute}</div>
+                                    <div class="long" style="display: none;">${contractor.logitute}</div>
+                                    <div class="name" style="display: none;">${contractor.name}</div>
+                                    <div class="rating" style="display: none;">${contractor.avgRating}</div>
+                                </div>
                                 <div class="col-md-3">
                                     <p>We are PICS contractors and we Love it!.</p>
-                                    
+
                                 </div>
                                 <div class="col-md-3">
                                     <a href="/Mongo-Hack/profile?id=${contractor.id}">
@@ -250,8 +260,6 @@ var markers = [];
         </div>
     </div>
 </div>
-
-
 
 
 </body>

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,13 +29,11 @@ public class ContractorController {
 		return new ModelAndView("index", "input", new InputDTO());
 	}
 
-	@RequestMapping(value = "/searchContractor", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchContractor", method = RequestMethod.GET)
 	public ModelAndView showResults(@Validated @ModelAttribute("input") InputDTO in) {
 		List<ContractorDTO> dtos = service.searchContractorByCriteria(Arrays.asList(in.getTrade()), in.getRating(), in.getZipCode());
-//		List<ContractorDTO> dtos = service.findAllContractors();
 		return new ModelAndView("contractorView", "contractors", dtos);
 	}
-
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView showProfile(@RequestParam String id) {
@@ -53,7 +50,7 @@ public class ContractorController {
 
 	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
 	public String submit(@Validated @ModelAttribute("review") ReviewDTO reviewDTO,
-							   BindingResult result, ModelMap modelMap) {
+						 BindingResult result, ModelMap modelMap) {
 		if (result.hasErrors()) {
 			return "forward:/error"; // I don't think this works
 		}
