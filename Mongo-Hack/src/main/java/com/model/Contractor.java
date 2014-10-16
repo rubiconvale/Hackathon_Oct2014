@@ -3,7 +3,6 @@ package com.model;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,9 +24,9 @@ public class Contractor implements Serializable, IContractor {
 	private List<String> trades;
 	@GeoSpatialIndexed
 	private double[] location;
-	@Transient
+
 	private double latitute;
-	@Transient
+
 	private double logitute;
 
 	private Integer zipCode;

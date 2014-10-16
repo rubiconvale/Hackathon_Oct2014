@@ -14,27 +14,81 @@
 
     <link href="${pageContext.request.contextPath}/resources/css/pics.css" type="text/css" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <%--<link href="<c:url value="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"/>" rel="stylesheet">--%>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKqxSWB8GcQPSn61zFa73d3bgJ6BjCebc">
     </script>
-    <script type="text/javascript">
-        function initialize() {
-            var mapOptions = {
-                center: { lat: 33.683, lng: -117.794},
-                zoom: 8
-            };
-            var map = new google.maps.Map(document.getElementById('map-canvas'),
-                    mapOptions);
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+
+
+function initialize() {
+var center = new google.maps.LatLng(33.655781, -117.778931);
+
+var map = new google.maps.Map(document.getElementById('map-canvas'), {
+zoom: 10,
+center: center,
+mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+
+var latArray = [];
+var x = $.makeArray($('.lat'));
+$.each(x, function(index, value){
+	latArray.push(parseFloat(value.innerText));
+});
+
+var longArray = [];
+var y = $.makeArray($('.long'));
+$.each(y, function(index, value){
+	longArray.push(parseFloat(value.innerText));
+});
+var nameArray = [];
+var x = $.makeArray($('.name'));
+$.each(x, function(index, value){
+	nameArray.push(value.innerText);
+});
+
+var ratingArray = [];
+var y = $.makeArray($('.rating'));
+$.each(y, function(index, value){
+	ratingArray.push(parseFloat(value.innerText));
+});
+
+var markers = [];
+  for (var i = 0; i < latArray.length; i++) {
+          var myLat = latArray[i];
+          var myLong = longArray[i];
+          var myName=nameArray[i];
+          var myRating= ratingArray[i];
+
+          var latLng = new google.maps.LatLng(myLat,myLong);
+          var marker = new google.maps.Marker({map: map,         position: latLng});
+          var avgStars=widthOfDisplay(i,myRating);
+          console.log("rating "+myRating +"stars : "+ avgStars);
+          var infowindow = new google.maps.InfoWindow({
+        	  content:"<div>"+myName+"</div><div id='"+i+"' class='stars-inner' style='width:"+avgStars+"'></div>"
+        	  });
+          infowindow.open(map,marker);
+          markers.push(marker);
+        }
+      };
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+      function widthOfDisplay(id,star) {
+			console.log("id : "+id);
+  	  return  widthOfRating=star*16+"px";
+    }
+      function starDisplay(id,star) {
+			console.log("id : "+id);
+    	  var widthOfRating=star*16;
+    	  $('#'+id).css('width', widthOfRating+'px');
+
+      }
+    </script>
 </head>
 
 <body>
@@ -119,6 +173,7 @@
                 <!-- Listing Information -->
                 <c:if test="${not empty contractors}">
                     <c:forEach var="contractor" items="${contractors}">
+
                         <div class="listing utility-box">
                             <div>
                                 <%--<h4 class="col-md-12 c-title">${contractor.name}</h4>--%>
@@ -127,7 +182,7 @@
 
                                 <div class="col-md-3">
                                     <div class="stars-rating">
-                                        <div class="stars-inner">${contractor.avgRating}</div>
+                                        <div id="${contractor.id}" class="stars-inner"><script type="text/javascript">starDisplay("${contractor.id}",${contractor.avgRating})</script></div>
                                     </div>
                                     <div class="verified-reviews">
                                         <a href="#">Reviews</a>
@@ -141,10 +196,14 @@
                                     <p>${contractor.city}, ${contractor.state} ${contractor.zipCode}</p>
 
                                     <div></div>
-                                </div>
+       									<div class="lat" style="display: none;">${contractor.latitute}</div>
+    									<div class="long"  style="display: none;">${contractor.logitute}</div>
+    									<div class="name"  style="display: none;">${contractor.name}</div>
+    									<div class="rating"  style="display: none;">${contractor.avgRating}</div>
+                                   </div>
                                 <div class="col-md-3">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    <a href="#">See More...</a>
+                                    <p>We are PICS contractors and we Love it!.</p>
+                                    
                                 </div>
                                 <div class="col-md-3">
                                     <a href="/Mongo-Hack/profile?id=${contractor.id}">
@@ -155,46 +214,6 @@
                         </div>
                     </c:forEach>
                 </c:if>
-
-
-                <%--<h2>Submitted Employee Information</h2>--%>
-                <%--<table>--%>
-                <%--<c:if test="${not empty contractors}">--%>
-                <%--<c:forEach var="contractor" items="${contractors}">--%>
-                <%--<div class="listing utility-box">--%>
-                <%--<div>--%>
-                <%--<h4 class="col-md-12 c-title">Contractor</h4>--%>
-
-                <%--<div class="col-md-3">--%>
-                <%--<div class="stars-rating">--%>
-                <%--<div class="stars-inner">${contractor.id} ${contractor.name}${contractor.avgRating} phone--%>
-                <%--: ${contractor.phoneNo} ${contractor.address} ${contractor.city} ${contractor.state}</div>--%>
-                <%--</div>--%>
-                <%--<div class="verified-reviews">--%>
-                <%--<a href="#">Reviews</a>--%>
-                <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="col-md-3">--%>
-                <%--<p class="heavy" itemprop="telephone">${contractor.phoneNo}</p>--%>
-
-                <%--<p></p>--%>
-
-                <%--<div></div>--%>
-                <%--</div>--%>
-                <%--<div class="col-md-3">--%>
-                <%--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>--%>
-                <%--<a href="#">See More...</a>--%>
-                <%--</div>--%>
-                <%--<div class="col-md-3">--%>
-                <%--<a href="/Mongo-Hack/profile?id=${contractor.id}">--%>
-                <%--<button class="btn btn-warning">Profile</button>--%>
-                <%--</a>--%>
-                <%--</div>--%>
-                <%--</div>--%>
-                <%--</div>--%>
-                <%--</c:forEach>--%>
-                <%--</c:if>--%>
-                <%--</table>--%>
 
                 <!-- Utility Box-->
                 <div class="utility-box-ad listing-criteria-block-bottom">
@@ -233,10 +252,7 @@
 </div>
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

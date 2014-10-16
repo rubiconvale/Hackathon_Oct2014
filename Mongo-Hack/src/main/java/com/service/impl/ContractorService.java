@@ -2,6 +2,7 @@ package com.service.impl;
 
 import com.dao.IReviewsRepositoryDao;
 import com.model.*;
+import com.model.Contractor.Review;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.CommandResult;
@@ -32,6 +33,7 @@ public class ContractorService implements IContractorService {
 	IReviewsRepositoryDao reviewsDao;
 
 	@Autowired
+
 	MongoTemplate mongoTemplate;
 
 	public Collection<Object> getNearestLocation(double log, double lat, double nearby) {
@@ -78,11 +80,12 @@ public class ContractorService implements IContractorService {
 
 	}
 
+
 	public List<ContractorDTO> searchContractorByCriteria(List<String> trades, Integer rating, Integer zipCode) {
 
 		String city = null;
 		String state = null;
-		List<ContractorDTO> finalList = new ArrayList<>();
+		List<ContractorDTO> finalList = new ArrayList<ContractorDTO>();
 		if (zipCode != null) {
 			Query zq = new Query(Criteria.where("id").is(zipCode.toString()));
 			ZipCOde z = mongoTemplate.findOne(zq, ZipCOde.class);
@@ -161,7 +164,6 @@ public class ContractorService implements IContractorService {
 			return finalList;
 
 		}
-
 		if (rating != null) {
 			TypedAggregation<ContractorDTO> aggregation = Aggregation.newAggregation(ContractorDTO.class,
 					Aggregation.unwind("reviews"),
@@ -201,25 +203,40 @@ public class ContractorService implements IContractorService {
 
 	public ContractorDTO find(Contractor contractor) {
 		Query qry = new Query(Criteria.where("id").is(contractor.getId()));
+		Contractor u = mongoTemplate.findOne(qry, Contractor.class);
+		ContractorDTO d = new ContractorDTO();
+		d.setId(u.getId());
+		d.setBusinessName(((Contractor) u).getBusinessName());
+		d.setLatitute(((Contractor) u).getLatitute());
+		d.setLocation(((Contractor) u).getLocation());
+		d.setLogitute(((Contractor) u).getLogitute());
+		d.setName(((Contractor) u).getName());
+		d.setReviews(((Contractor) u).getReviews());
+		d.setTrades(((Contractor) u).getTrades());
+		d.setAddress(((Contractor) u).getAddress());
+		d.setPhoneNo(((Contractor) u).getPhoneNo());
 
-		return wrapContractor(mongoTemplate.findOne(qry, Contractor.class));
+		if (u.getZipCode() != null) {
+			Query zq = new Query(Criteria.where("id").is(u.getZipCode().toString()));
+			ZipCOde z = mongoTemplate.findOne(zq, ZipCOde.class);
+			Log.debug("Zip code query : {} ", zq);
+			if (z != null) {
+				d.setCity(z.getCity());
+				d.setState(z.getState());
+			}
+		}
+		d.setAvgRating(calculateAverageRating(u));
+		return d;
 	}
 
-	private ContractorDTO wrapContractor(Contractor contractor) {
-		AggregationResults<ContractorDTO> aggregationResults = mongoTemplate.aggregate(
-				Aggregation.newAggregation(ContractorDTO.class,
-						Aggregation.match(Criteria.where("id").is(contractor.getId())),
-						Aggregation.unwind("reviews"),
-						Aggregation.group("id").avg("reviews.rating").as("avgRating")),
-				ContractorDTO.class);
-
-
-		ContractorDTO contractorDTO = aggregationResults.getUniqueMappedResult();
-		if (contractorDTO == null) {
-			return null;
+	private Double calculateAverageRating(Contractor u) {
+		Double avg = null;
+		double i = 0;
+		for (Review r : u.getReviews()) {
+			i += r.getRating();
 		}
-
-		return addContractorData(contractorDTO);
+		avg = (i != 0 ? i / u.getReviews().size() : null);
+		return avg;
 	}
 
 	private List<ContractorDTO> wrapContractors(List<Contractor> contractors) {

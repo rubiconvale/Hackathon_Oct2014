@@ -56,18 +56,18 @@
 
                         <div class="form-answers col-md-8">
 
-                            <div class="rateit" id="rateit5" data-rateit-min="">
-                            </div>
-
-                            <div>
-                                <span id="value5"></span>
-                                <span id="hover5"></span>
-                            </div>
+                            <%--<div class="rateit" id="rateit5" data-rateit-min="">--%>
+                            <%--</div>--%>
 
                             <%--<div>--%>
-                                <%--<label>Rating</label>--%>
-                                <%--<input name="rating"/>--%>
+                                <%--<span id="value5"></span>--%>
+                                <%--<span id="hover5"></span>--%>
                             <%--</div>--%>
+
+                            <div>
+                                <label>Rating</label>
+                                <input name="rating"/>
+                            </div>
 
                         </div>
                     </div>
