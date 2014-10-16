@@ -102,7 +102,7 @@
                     <div class="l-right col-md-3">
                         <form id="rating-form" action="" method="post" name="">
                             <label for="sortBy">Sort By:</label>
-                            <select id="sortBy" class="form-control-sortBy" name="sortBy" onchange="">
+                            <select id="sortBy" class="form-control-sortBy" name="sortBy" onchange="this.form.submit()">
                                 <option value="0">5-Star</option>
                                 <option value="1">4-Star</option>
                                 <option value="2">3-Star</option>

@@ -5,11 +5,11 @@ public class ContractorDTO extends Contractor {
 	private static final long serialVersionUID = 1L;
 
 	private Double avgRating;
-	
+
 	private String city;
-	
+
 	private String state;
-		
+
 
 	public Double getAvgRating() {
 		return avgRating;
@@ -18,7 +18,6 @@ public class ContractorDTO extends Contractor {
 	public void setAvgRating(Double avgRating) {
 		this.avgRating = avgRating;
 	}
-
 
 	public String getCity() {
 		return city;
@@ -35,7 +34,4 @@ public class ContractorDTO extends Contractor {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
-	
 }

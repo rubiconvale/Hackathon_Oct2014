@@ -158,7 +158,7 @@
           <section class="profile-reviews col-md-12">
             <h3 class="reviews-title">Reviews</h3>
 
-            <a class="various fancybox.iframe write-review" href="contractorView.jsp"><button class="btn btn-default">Write a Review</button></a>
+            <a class="various fancybox.iframe write-review" href="/Mongo-Hack/addReview?id=${contractor.id}"><button class="btn btn-default">Write a Review</button></a>
 
             <div class="clearing"></div>
             <hr>
