@@ -31,10 +31,10 @@
 			<c:forEach var="contractor" items="${contractors}">
             <div class="listing utility-box">
               <div>
-                <h4 class="col-md-12 c-title">Contractor</h4>
+                <h4 class="col-md-12 c-title">${contractor.name}</h4>
                 <div class="col-md-3">
                   <div class="stars-rating">
-                    <div class="stars-inner">${contractor.id} ${contractor.name}${contractor.avgRating} phone : ${contractor.phoneNo} ${contractor.address} ${contractor.city}  ${contractor.state}</div>
+                    <div class="stars-inner">${contractor.avgRating}</div>
                   </div>
                   <div class="verified-reviews">
                     <a href="#">Reviews</a>
@@ -46,8 +46,7 @@
                   <div></div>
                 </div>
                 <div class="col-md-3">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <a href="#">See More...</a>
+                  <p class="heavy" itemprop="address">${contractor.address}, ${contractor.city}, ${contractor.state}, ${contractor.zipCode} </p>
                 </div>
                 <div class="col-md-3">
                   <a href="/Mongo-Hack/profile?id=${contractor.id}"><button class="btn btn-warning">Profile</button></a>

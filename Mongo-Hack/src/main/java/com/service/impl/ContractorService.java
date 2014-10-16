@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -75,7 +76,7 @@ MongoTemplate mongoTemplate;
 		
 		String city=null;
 		String state=null;
-					
+		List<ContractorDTO> finalList=new ArrayList<ContractorDTO>();
 		if(zipCode!=null){
 			Query zq=new Query(Criteria.where("id").is(zipCode.toString()));
 			ZipCOde z=mongoTemplate.findOne(zq, ZipCOde.class);
@@ -98,11 +99,11 @@ MongoTemplate mongoTemplate;
 			AggregationResults<ContractorDTO> agResults= mongoTemplate.aggregate(aggregation,ContractorDTO.class);
 
 			for (ContractorDTO d:agResults.getMappedResults()){
-				Query q=new Query(Criteria.where("trades").in(trades).and("zipCode").is(zipCode));
+				Query q=new Query(Criteria.where("trades").in(trades).and("zipCode").is(zipCode).and("id").is(d.getId()));
 				IContractor u=mongoTemplate.findOne(q, Contractor.class);
 
-				if(u==null){d=null; break;}
-
+				if(u!=null){
+					System.out.println("u = "+u.toString());
 				d.setBusinessName(((Contractor)u).getBusinessName());
 				d.setLatitute(((Contractor)u).getLatitute());
 				d.setLocation(((Contractor)u).getLocation());
@@ -112,10 +113,13 @@ MongoTemplate mongoTemplate;
 				d.setTrades(((Contractor)u).getTrades());
 				d.setAddress(((Contractor)u).getAddress());
 				d.setPhoneNo(((Contractor)u).getPhoneNo());
+				d.setZipCode(((Contractor)u).getZipCode());
 				d.setCity(city);
 				d.setState(state);
+				finalList.add(d);
+				}
 			}
-			return agResults.getMappedResults();
+			return finalList;
 		}
 		if(CollectionUtils.isNotEmpty(trades)){
 			TypedAggregation<ContractorDTO> aggregation = Aggregation.newAggregation(ContractorDTO.class,
@@ -129,9 +133,10 @@ MongoTemplate mongoTemplate;
 			AggregationResults<ContractorDTO> agResults= mongoTemplate.aggregate(aggregation,ContractorDTO.class);
 
 			for (ContractorDTO d:agResults.getMappedResults()){
+				System.out.println("d = "+d.toString());
 				Query q=new Query(Criteria.where("trades").in(trades).and("id").is(d.getId()).and("zipCode").is(zipCode));
 				IContractor u=mongoTemplate.findOne(q, Contractor.class);
-				if(u==null){d=null;break;}
+				if(u!=null){
 				d.setBusinessName(((Contractor)u).getBusinessName());
 				d.setLatitute(((Contractor)u).getLatitute());
 				d.setLocation(((Contractor)u).getLocation());
@@ -141,10 +146,13 @@ MongoTemplate mongoTemplate;
 				d.setTrades(((Contractor)u).getTrades());
 				d.setAddress(((Contractor)u).getAddress());
 				d.setPhoneNo(((Contractor)u).getPhoneNo());
+				d.setZipCode(((Contractor)u).getZipCode());
 				d.setCity(city);
 				d.setState(state);
+				finalList.add(d);
+				}
 			}
-			return agResults.getMappedResults();
+			return finalList;
 			
 		}
 		if(rating!=null){
@@ -159,9 +167,11 @@ MongoTemplate mongoTemplate;
 			AggregationResults<ContractorDTO> agResults= mongoTemplate.aggregate(aggregation,ContractorDTO.class);
 
 			for (ContractorDTO d:agResults.getMappedResults()){
+				System.out.println("d = "+d.toString());
 				Query q=new Query(Criteria.where("id").is(d.getId()).and("zipCode").is(zipCode));
 				IContractor u=mongoTemplate.findOne(q, Contractor.class);				
-
+				if(u!=null){
+					System.out.println("u = "+u.toString());
 				d.setBusinessName(((Contractor)u).getBusinessName());
 				d.setLatitute(((Contractor)u).getLatitute());
 				d.setLocation(((Contractor)u).getLocation());
@@ -171,10 +181,13 @@ MongoTemplate mongoTemplate;
 				d.setTrades(((Contractor)u).getTrades());
 				d.setAddress(((Contractor)u).getAddress());
 				d.setPhoneNo(((Contractor)u).getPhoneNo());
+				d.setZipCode(((Contractor)u).getZipCode());
 				d.setCity(city);
 				d.setState(state);
+				finalList.add(d);
+				}
 			}
-			return agResults.getMappedResults();
+			return finalList;
 		}		
 		return null ;
 	}

@@ -9,8 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,9 +24,13 @@ public class ContractorController {
 	@Autowired
 	IContractorService service;
 	
-    @RequestMapping(value = "/contractor", method = RequestMethod.GET)
-    public ModelAndView showResults() {
-    	List<ContractorDTO> dtos=service.searchContractorByCriteria(Arrays.asList("PAINTING"), 2, 92714);
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView indexView(@Validated @ModelAttribute("input")InputDTO in) {
+        return new ModelAndView("index", "input", new InputDTO());
+    }
+    @RequestMapping(value = "/searchContractor", method = RequestMethod.POST)
+    public ModelAndView showResults(@Validated @ModelAttribute("input")InputDTO in) {
+    	List<ContractorDTO> dtos=service.searchContractorByCriteria(Arrays.asList(in.getTrade()), in.getRating(), in.getZipCode());
         return new ModelAndView("contractorView", "contractors", dtos);
     }
 
