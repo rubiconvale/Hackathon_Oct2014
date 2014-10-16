@@ -40,31 +40,49 @@ public class TestLocationMapService extends BaseServiceHarness {
 	public void testInsertContractors(){
 		String[] name={" INC"," LLC", " PLC", " CORP"};
 		Integer[] zip={92714,92715, 92718, 92720};
+		Double[] myLatArray = {33.68764d,33.650884d,33.658179d,33.707495d};
+
+		Double[] myLongArray = {-117.798928,-117.821251,-117.711476,-117.765533};
+		
 		String[] trades={"ELECTRICIAN","PLUMBING", "JANITORIAL", "WELDING","FORKLIFT","AIRCRAFT MAINTENANCE","PAINTING"};
 		for(int i=0;i<10;i++){
 			String trade=trades[RandomUtils.nextInt(6)];
-		insertContractor("MOE's "+trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i);
+			double lat=myLatArray[RandomUtils.nextInt(4)];
+			double lon=myLongArray[RandomUtils.nextInt(4)];
+		insertContractor("MOE's "+trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i, lat,lon );
 		trade=trades[RandomUtils.nextInt(6)];
-		insertContractor("JIM's " +trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i);
+		lat=myLatArray[RandomUtils.nextInt(4)];
+		lon=myLongArray[RandomUtils.nextInt(4)];
+		insertContractor("JIM's " +trade +name[RandomUtils.nextInt(4)],  trade,zip[RandomUtils.nextInt(4)],i, lat,lon );
 		trade=trades[RandomUtils.nextInt(6)];
-		insertContractor("TIM's "+trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i);
+		lat=myLatArray[RandomUtils.nextInt(4)];
+		lon=myLongArray[RandomUtils.nextInt(4)];
+		insertContractor("TIM's "+trade +name[RandomUtils.nextInt(4)],  trade,zip[RandomUtils.nextInt(4)],i, lat,lon );
 		trade=trades[RandomUtils.nextInt(6)];
-		insertContractor("MIKE's "+trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i);
+		lat=myLatArray[RandomUtils.nextInt(4)];
+		lon=myLongArray[RandomUtils.nextInt(4)];
+		insertContractor("MIKE's "+trade +name[RandomUtils.nextInt(4)],  trade,zip[RandomUtils.nextInt(4)],i, lat,lon );
 		trade=trades[RandomUtils.nextInt(6)];
-		insertContractor("TOM's "+trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i);
+		lat=myLatArray[RandomUtils.nextInt(4)];
+		lon=myLongArray[RandomUtils.nextInt(4)];
+		insertContractor("TOM's "+trade +name[RandomUtils.nextInt(4)],  trade,zip[RandomUtils.nextInt(4)],i, lat,lon );
 		trade=trades[RandomUtils.nextInt(6)];
-		insertContractor("JONAS'S "+trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i);
+		lat=myLatArray[RandomUtils.nextInt(4)];
+		lon=myLongArray[RandomUtils.nextInt(4)];
+		insertContractor("JONAS'S "+trade +name[RandomUtils.nextInt(4)],  trade,zip[RandomUtils.nextInt(4)],i, lat,lon );
 		trade=trades[RandomUtils.nextInt(6)];
-		insertContractor("MAY'S "+trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i);
+		lat=myLatArray[RandomUtils.nextInt(4)];
+		lon=myLongArray[RandomUtils.nextInt(4)];
+		insertContractor("MAY'S "+trade +name[RandomUtils.nextInt(4)],  trade,zip[RandomUtils.nextInt(4)],i, lat,lon );
 		}
 		
 	}
 
-	private void insertContractor(String name, String trade, Integer zip, int i ){
+	private void insertContractor(String name, String trade, Integer zip, int i, double lat, double lon ){
 		Contractor m=new Contractor();
 		m.setBusinessName(name);
-		m.setLatitute(103.7866d);
-		m.setLogitute(1.43);
+		m.setLatitute(lat);
+		m.setLogitute(lon);
 		m.setAddress(RandomUtils.nextInt()+"123 Test drive");
 		m.setContactName("Jim Jones");
 		m.setName(name);

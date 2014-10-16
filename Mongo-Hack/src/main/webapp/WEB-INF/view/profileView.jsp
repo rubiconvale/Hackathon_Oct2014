@@ -12,7 +12,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/pics.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/rateit.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/fancyBox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 
     <!-- Bootstrap -->
     <%--<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">--%>
@@ -29,7 +29,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.rateit.js"></script>
     <!-- Add fancyBox -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
       <script type="text/javascript">
           $(document).ready(function() {
@@ -52,6 +52,12 @@
               });
 
           });
+          function starDisplay(id,star) {
+
+        	  var widthOfRating=star*16;
+        	  $('#'+id).css('width', widthOfRating+'px');
+
+          }
       </script>
 
   </head>
@@ -99,7 +105,7 @@
               <h1>${contractor.name}</h1>
               <div class="col-md-4">
                 <div class="stars-rating">
-                    <div class="stars-inner">${contractor.avgRating}</div>
+                    <div id="${contractor.id}" class="stars-inner"><script type="text/javascript">starDisplay("${contractor.id}",${contractor.avgRating})</script></div>
                     <div class="verified-reviews">
                       <a class="various fancybox.iframe" href="file:///Users/ca00456-mb/Documents/HACKATHON/ContractorReviews/RateContractor.html">Write a Review</a>
                     </div>
@@ -165,11 +171,11 @@
 
     	<c:if test="${not empty contractor.reviews}">
 
-            <c:forEach var="review" items="${contractor.reviews}">
+            <c:forEach var="review" items="${contractor.reviews}" varStatus="countOfReviews">
             <div class="profile-user-review">
 
               <div class="stars-rating">
-                  <div class="stars-inner stars-profile-review">${review.rating}</div> 
+                  <div  id="${countOfReviews.index}" class="stars-inner stars-profile-review"><script type="text/javascript">starDisplay("${countOfReviews.index}",${review.rating})</script></div> 
                   <span class="heavy t-stars-rating">${review.rating}</span> 
                   <span class="t-text-pipe">&nbsp;&nbsp;|&nbsp;&nbsp;</span>  
                   <span data="datePublished">${review.date}</span>              

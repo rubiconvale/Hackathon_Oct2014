@@ -25,9 +25,9 @@ private List<Review> reviews=new ArrayList<Contractor.Review>();
 private List<String> trades;
 @GeoSpatialIndexed
 private double[] location;
-@Transient
+
 private double latitute;
-@Transient
+
 private double logitute;
  
 private Integer zipCode;

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.IReviewsRepositoryDao;
 import com.model.Contractor;
+import com.model.Contractor.Review;
 import com.model.ContractorDTO;
 import com.model.IContractor;
 import com.model.ZipCOde;
@@ -196,6 +197,7 @@ MongoTemplate mongoTemplate;
 		Query qry=new Query(Criteria.where("id").is(contractor.getId()));
 		Contractor u= mongoTemplate.findOne(qry, Contractor.class);
 		ContractorDTO d=new ContractorDTO();
+		d.setId(u.getId());
 		d.setBusinessName(((Contractor)u).getBusinessName());
 		d.setLatitute(((Contractor)u).getLatitute());
 		d.setLocation(((Contractor)u).getLocation());
@@ -215,6 +217,12 @@ MongoTemplate mongoTemplate;
 				d.setState(z.getState());
 			}
 		}
+		Double avg=null; double i=0;
+		for(Review r:u.getReviews()){
+			i+=r.getRating();
+		}
+		avg=(i!=0? i/u.getReviews().size():null);
+		d.setAvgRating(avg);
 		return d;
 	}
 
