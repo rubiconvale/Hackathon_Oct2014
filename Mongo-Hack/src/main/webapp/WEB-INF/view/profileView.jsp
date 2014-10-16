@@ -107,7 +107,7 @@
                 <div class="stars-rating">
                     <div id="${contractor.id}" class="stars-inner"><script type="text/javascript">starDisplay("${contractor.id}",${contractor.avgRating})</script></div>
                     <div class="verified-reviews">
-                      <a class="various fancybox.iframe" href="file:///Users/ca00456-mb/Documents/HACKATHON/ContractorReviews/RateContractor.html">Write a Review</a>
+                      <a class="various" href="/Mongo-Hack/addReview?id=${contractor.id}">Write a Review</a>
                     </div>
                 </div>
               </div>
@@ -164,9 +164,12 @@
           <section class="profile-reviews col-md-12">
             <h3 class="reviews-title">Reviews</h3>
 
-            <a class="various fancybox.iframe write-review" href="contractorView.jsp"><button class="btn btn-default">Write a Review</button></a>
+            <%--<a class="various fancybox.iframe write-review" href="/Mongo-Hack/addReview?id=${contractor.id}"><button class="btn btn-default">Write a Review</button></a>--%>
 
-            <div class="clearing"></div>
+              <a class="various write-review" href="/Mongo-Hack/addReview?id=${contractor.id}"><button class="btn btn-default">Write a Review</button></a>
+
+
+              <div class="clearing"></div>
             <hr>
 
     	<c:if test="${not empty contractor.reviews}">
