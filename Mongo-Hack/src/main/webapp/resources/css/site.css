@@ -187,7 +187,13 @@ h4.green{
     margin: 10px 10px 10px 30px;
 }
 
+/*Profile page*/
 
+.profile-user-review{
+    margin-bottom: 25px;
+    padding-left: 10px;
+    border-left: 1px solid #eeeeee;
+}
 
 
 

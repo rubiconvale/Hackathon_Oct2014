@@ -158,14 +158,16 @@
           <section class="profile-reviews col-md-12">
             <h3 class="reviews-title">Reviews</h3>
 
-            <a class="fancybox write-review" href="file:///Users/ca00456-mb/Documents/HACKATHON/ContractorReviews/RateContractor.html"><button class="btn btn-default">Write a Review</button></a>
+            <a class="various fancybox.iframe write-review" href="contractorView.jsp"><button class="btn btn-default">Write a Review</button></a>
 
             <div class="clearing"></div>
             <hr>
+
     	<c:if test="${not empty contractor.reviews}">
 
+            <c:forEach var="review" items="${contractor.reviews}">
             <div class="profile-user-review">
-			<c:forEach var="review" items="${contractor.reviews}">
+
               <div class="stars-rating">
                   <div class="stars-inner stars-profile-review">${review.rating}</div> 
                   <span class="heavy t-stars-rating">${review.rating}</span> 
@@ -181,8 +183,9 @@
                   <span data="reviewBody">${review.comment}</span>
                 </div>
               </div>
-			</c:forEach>
+
             </div>
+            </c:forEach>
 		</c:if>
           </section><!-- end "profile-reviews" -->
 
@@ -190,12 +193,9 @@
         </div> <!-- end "content-main" -->
 
         <div class="col-md-3">
-          <section class="ads">
-            <h5>PICS Ads &copy;</h5>
-          </section><!-- end "col-md-3 ads" -->
 
-          <section style="margin-bottom: 10px">
-            <a href="#"><img src="img/ad3-3.jpg"></a>
+          <section class="ads">
+            <a href="#"><img src="${pageContext.request.contextPath}/resources/img/ad3-3.jpg"></a>
           </section>
 
         </div>
