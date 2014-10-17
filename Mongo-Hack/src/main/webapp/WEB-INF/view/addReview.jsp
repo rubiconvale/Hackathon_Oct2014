@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-answers col-md-8">
 
-                                  <input id="relationship4" name="relationship" onclick="document.getElementById('specify-relationship').focus();" type="text" placeholder="Name">
+                                  <input id="relationship4" name="author" onclick="document.getElementById('specify-relationship').focus();" type="text" placeholder="Name">
                                      
                             </div>
                    </div>
