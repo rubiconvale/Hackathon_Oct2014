@@ -16,6 +16,41 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
 <body>
+<header>
+    <div id="primary_navigation" class="navbar-fixed-top bootstrap3">
+        <div class="container">
+
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Dashboard</a>
+                </div>
+                <ul class="nav navbar-nav">
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Company</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Reports</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Manage</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Configure</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Dev</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Support</a>    
+              </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</header>
+<div>&nbsp;</div>
+
 <div class="container-review-form">
     <div class="row">
 
@@ -26,15 +61,16 @@
                 <form id="ratingReviewForm" name="review" action="/Mongo-Hack/addReview" method="POST">
                     <input type="hidden" name="contractorId" value="${contractorId}"/>
 
-                    <div class="form-row">
-                        <div class="form-questions col-md-3">
-                            <label for="relationship">Author<span class="t-required">*</span></label>
-                        </div>
+                   <div class="form-row">
+                            <div class="form-questions col-md-3">
+                               <label for="relationship">Author<span class="t-required">*</span></label>
+                            </div>
+                            <div class="form-answers col-md-8">
 
-                        <div class="col-md-8">
-                            <input id="relationship4" name="author" onclick="document.getElementById('specify-relationship').focus();" type="text" placeholder="Name">
-                        </div>
-                    </div>
+                                  <input id="relationship4" name="relationship" onclick="document.getElementById('specify-relationship').focus();" type="text" placeholder="Name">
+                                     
+                            </div>
+                   </div>
 
                     <div class="form-row">
 
@@ -43,31 +79,26 @@
                         </div>
 
                         <div class="col-md-8">
-                            <textarea rows="7" cols="70" name="comment"></textarea>
+                            <textarea rows="4" cols="50" name="comment"></textarea>
                         </div>
 
                     </div>
-
+					<div>&nbsp;</div>
 
                     <div class="form-row">
                         <div class="form-questions col-md-3">
                             <label for="overallRating">What is your overall rating of this business?<span class="t-required">*</span></label>
                         </div>
-
+					<div>&nbsp;</div>
                         <div class="form-answers col-md-8">
 
-                            <%--<div class="rateit" id="rateit5" data-rateit-min="">--%>
-                            <%--</div>--%>
-
-                            <%--<div>--%>
-                                <%--<span id="value5"></span>--%>
-                                <%--<span id="hover5"></span>--%>
-                            <%--</div>--%>
-
-                            <div>
-                                <label>Rating</label>
-                                <input name="rating"/>
-                            </div>
+                            <select id="rating" name="rating" class="form-control-sortBy" >
+                                <option value="5">5-Star</option>
+                                <option value="4">4-Star</option>
+                                <option value="3">3-Star</option>
+                                <option value="2">2-Star</option>
+                                <option value="1">1-Star</option>
+                            </select>
 
                         </div>
                     </div>
@@ -99,38 +130,3 @@
 </body>
 </html>
 
-
-
-
-
-
-
-
-<%--<html>--%>
-<%--<head>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<h3>Welcome, Enter The Employee Details</h3>--%>
-<%--&lt;%&ndash;<form method="POST" action="/Mongo-Hack/addReview" name="review">&ndash;%&gt;--%>
-<%--<form name="review" action="/Mongo-Hack/addReview" method="POST"/>--%>
-    <%--<input type="hidden" name="contractorId" value="${contractorId}"/>--%>
-    <%--<table>--%>
-        <%--<tr>--%>
-            <%--<td><label>Name</label></td>--%>
-            <%--<td><input name="author"/></td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td><label>Comment</label></td>--%>
-            <%--<td><input name="comment"/></td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td><label>Rating</label></td>--%>
-            <%--<td><input name="rating"/></td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td><input type="submit" value="Submit"/></td>--%>
-        <%--</tr>--%>
-    <%--</table>--%>
-<%--</form>--%>
-<%--</body>--%>
-<%--</html>--%>

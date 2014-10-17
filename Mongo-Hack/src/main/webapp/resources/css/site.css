@@ -1,71 +1,71 @@
 h4.c-title{
-    color: #5486a3;
+	color: #5486a3;
 }
 
 h3.reviews-title{
-    float: left;
+	float: left;
 }
 
 h5.ads-title{
-    margin: 0 0 5px;
+	margin: 0 0 5px;
 }
 
 .write-review{
-    float: right;
-    margin-top: 20px;
+	float: right;
+	margin-top: 20px;
 }
 
 .heavy{
-    font-weight: bold;
+	font-weight: bold;
 }
 
 
 .listing{
-    height: 159px;
+	height: 159px;
 }
 
 .listing-criteria-block-top{
-    height: 65px;
+	height: 65px;
 }
 
 .listing-criteria-block-bottom{
-    height: 92px;
+	height: 92px;
 }
 
 .utility-box{
-    padding: 15px 0;
-    border: 1px solid #e0d5c8;
-    background-color: #f8f7f1;
+	padding: 15px 0;
+	border: 1px solid #e0d5c8;
+	background-color: #f8f7f1;
 }
 
 .utility-box-ad{
-    margin-top: 5px;
-    /*border: 1px solid #e0d5c8;*/
-    /*background-color: #f8f7f1;*/
+	margin-top: 5px;
+	/*border: 1px solid #e0d5c8;*/
+	/*background-color: #f8f7f1;*/
 }
 
 .utility-box-pagination{
-    padding: 15px 0;
-    /*border: 1px solid #e0d5c8;*/
-    background-color: #fff;
+	padding: 15px 0;
+	/*border: 1px solid #e0d5c8;*/
+	background-color: #fff;
 }
 
 .clearing{
-    height: 1px;
-    line-height: 1px;
-    font-size: 1px;
-    clear: both;
+	height: 1px;
+	line-height: 1px;
+	font-size: 1px;
+	clear: both;
 }
 
 h4.green{
-    color: #9ba639;
+	color: #9ba639;
 }
 
 .featured-separator{
-    text-align: right;
-    margin-top: 5px;
-    color:#ccc;
-    font-size: 10px;
+	text-align: right;
+	margin-top: 5px;
+	color:#ccc;
+	font-size: 10px;
 }
 
 .stars-rating{
@@ -73,118 +73,122 @@ h4.green{
 }
 
 .stars-inner{
-    background: transparent url(http://cdn1.homeadvisor.com/images/consumer/theme/icons/stars_small.png) repeat-x 0 0;
-    height: 13px;
-    width: 80px;
-    background-position: 0 -13px;
+	background: transparent url(http://cdn1.homeadvisor.com/images/consumer/theme/icons/stars_small.png) repeat-x 0 0;
+	height: 13px;
+	/*width: 80px;*/
+	background-position: 0 -13px;
 }
 
 .stars-profile-review{
-    float: left;
-    line-height: 1.15em;
-    margin-top: 3px;
+	float: left;
+	line-height: 1.15em;
+	margin-top: 3px;
 }
 
 .input-text{
 
-    font-size: 14px;
-    line-height: 1.428571429;
-    color: #555555;
-    vertical-align: middle;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	font-size: 14px;
+  line-height: 1.428571429;
+  color: #555555;
+  vertical-align: middle;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 
 }
 
 .t-stars-rating{
-    color: #F7901E;
-    font-size: 14px;
-    line-height: 1.15em;
-    margin-left: 5px;
+	color: #F7901E;
+	font-size: 14px;
+	line-height: 1.15em;
+	margin-left: 5px;
 }
 
 .t-text-pipe{
-    color: #ccc;
+	color: #ccc;
 }
 
 .verified-reviews{
-    margin-top: 5px;
+	margin-top: 5px;
 }
 
 .ads{
-    float: right;
-    margin: 70px 0 0;
+	float: right;
+	margin: 70px 0 0;
+}
+
+.top-ad{
+	margin-top: 70px;
 }
 
 /*RateContractor page*/
 
 .container-review-form{
-    width: 750px;
-    margin: auto;
+	width: 750px;
+	margin: auto;
 }
 
 .t-border{
-    border: 1px solid #e0d5c8;
+	border: 1px solid #e0d5c8;
 }
 
 .t-underline{
-    border-bottom: 1px solid #e0d5c8;
+	border-bottom: 1px solid #e0d5c8;
 }
 
 .t-header-big{
-    font-size: 18px;
-    color: #5c5954;
-    font-weight: bold;
-    margin: 0;
+	font-size: 18px;
+	color: #5c5954;
+	font-weight: bold;
+	margin: 0;
 }
 
 .t-header-box{
-    padding: 10px;
-    background-color: rgb(231, 229, 218);
+	padding: 10px;
+	background-color: rgb(231, 229, 218);
 }
 
 .l-utility-box-padding{
-    padding: 15px;
+	padding: 15px;
 }
 
 .review-form .form-row{
-    margin: 20px 0px 20px 20px;
+	margin: 20px 20px 20px 20px;
+	padding:15px;
 }
 
 .review-form .form-row .form-questions{
-    display: inline-block;
-    width: 29%;
-    vertical-align: top;
+	display: inline-block;
+	width: 29%;
+	vertical-align: top;
 }
 
 #relationship1, #relationship2, #relationship3, #relationship4, #recommend1, #recommend2, #rateit-reset-2{
-    margin: 5px;
+	margin: 5px 0;
 }
 
 #rateit-range-2{
-    margin-top: 5px;
+	margin-top: 5px;
 }
 
 .btn-review{
-    margin-left: 15px;
+	margin-left: 15px;
 }
 
 
 /*GOOGLE MAPS*/
 #map-canvas {
-    height: 355px;
-    width: 292px;
-    margin-top: 70px;
-    padding: 0;
+	 height: 400px; 
+	 width: 848px; 
+	 padding: 0;
 }
 
 .ads-separator{
-    margin: 10px 10px 10px 30px;
+	margin: 10px 10px 10px 30px;
 }
 
 /*Profile page*/
@@ -192,7 +196,11 @@ h4.green{
 .profile-user-review{
     margin-bottom: 25px;
     padding-left: 10px;
-    border-left: 1px solid #eeeeee;
+    
+}
+
+#rating{
+	width: 100px;
 }
 
 

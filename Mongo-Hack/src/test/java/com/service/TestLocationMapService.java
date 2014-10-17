@@ -44,9 +44,9 @@ public class TestLocationMapService extends BaseServiceHarness {
 
 		Double[] myLongArray = {-117.798928,-117.821251,-117.711476,-117.765533};
 		
-		String[] trades={"ELECTRICIAN","PLUMBING", "JANITORIAL", "WELDING","FORKLIFT","AIRCRAFT MAINTENANCE","PAINTING"};
+		String[] trades={"ELECTRICIAN","PLUMBING", "JANITORIAL", "WELDING","DRILLING","PAINTING","MASONRY"};
 		for(int i=0;i<10;i++){
-			String trade=trades[RandomUtils.nextInt(6)];
+			String trade=trades[RandomUtils.nextInt(7)];
 			double lat=myLatArray[RandomUtils.nextInt(4)];
 			double lon=myLongArray[RandomUtils.nextInt(4)];
 		insertContractor("MOE's "+trade +name[RandomUtils.nextInt(4)], trade,zip[RandomUtils.nextInt(4)],i, lat,lon );

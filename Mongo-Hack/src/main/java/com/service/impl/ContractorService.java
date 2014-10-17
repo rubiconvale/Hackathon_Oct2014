@@ -284,7 +284,7 @@ public class ContractorService implements IContractorService {
 	}
 
 	private List<String> contractorIds(List<Contractor> contractors) {
-		List<String> ids = new ArrayList<>();
+		List<String> ids = new ArrayList<String>();
 		for (Contractor contractor : contractors) {
 			ids.add(contractor.getId());
 		}

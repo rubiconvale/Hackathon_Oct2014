@@ -29,7 +29,7 @@
             var center = new google.maps.LatLng(33.655781, -117.778931);
 
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
-                zoom: 10,
+                zoom: 12,
                 center: center,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
@@ -101,24 +101,24 @@
                     <a class="navbar-brand" href="/">Dashboard</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <%--<li class="dropdown ">--%>
-                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Company</a>--%>
-                    <%--</li>--%>
-                    <%--<li class="dropdown ">--%>
-                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Reports</a>--%>
-                    <%--</li>--%>
-                    <%--<li class="dropdown ">--%>
-                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Manage</a>--%>
-                    <%--</li>--%>
-                    <%--<li class="dropdown ">--%>
-                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Configure</a>--%>
-                    <%--</li>--%>
-                    <%--<li class="dropdown ">--%>
-                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Dev</a>--%>
-                    <%--</li>--%>
-                    <%--<li class="dropdown ">--%>
-                    <%--<a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Support</a>--%>
-                    <%--</li>--%>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Company</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Reports</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Manage</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Configure</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Dev</a>    
+              </li>
+              <li class="dropdown ">
+                <a id="" href="" class="dropdown-toggle" data-toggle="dropdown" target="">Support</a>    
+              </li>
                 </ul>
             </nav>
 
@@ -162,6 +162,7 @@
                                 Search
                             </button>
                         </div>
+   
                         <div class="l-right col-md-3">
                             <label for="rating">Filter By:</label>
                             <select id="rating" name="rating" class="form-control-sortBy" onchange="this.form.submit()">
@@ -177,6 +178,10 @@
 
                 <!-- Separator -->
                 <div class="featured-separator">FEATURED</div>
+            <!-- Separator -->
+            <section style="margin-bottom: 10px">
+             <div id="map-canvas"></div>
+            </section>
 
                 <!-- Listing Information -->
                 <c:if test="${not empty contractors}">
@@ -248,14 +253,14 @@
         </div>
         <div class="col-md-3">
 
-            <section style="margin-bottom: 10px">
-                <div id="map-canvas"></div>
-            </section>
+          <section class="top-ad">
+            <a href="#"><img src="${pageContext.request.contextPath}/resources/img/ad3-3.jpg"></a>
+          </section>
 
             <hr class="ads-separator">
 
             <section>
-                <a href="#"><img src="${pageContext.request.contextPath}/resources/img/ad3-3.jpg"></a>
+                <a href="#"><img src="${pageContext.request.contextPath}/resources/img/ad1-3.jpg"></a>
             </section>
         </div>
     </div>

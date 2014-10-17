@@ -6,6 +6,10 @@ h3.reviews-title{
 	float: left;
 }
 
+h5.ads-title{
+	margin: 0 0 5px;
+}
+
 .write-review{
 	float: right;
 	margin-top: 20px;
@@ -71,7 +75,7 @@ h4.green{
 .stars-inner{
 	background: transparent url(http://cdn1.homeadvisor.com/images/consumer/theme/icons/stars_small.png) repeat-x 0 0;
 	height: 13px;
-	width: 80px;
+	/*width: 80px;*/
 	background-position: 0 -13px;
 }
 
@@ -114,7 +118,11 @@ h4.green{
 
 .ads{
 	float: right;
-	padding-top: 34px;
+	margin: 70px 0 0;
+}
+
+.top-ad{
+	margin-top: 70px;
 }
 
 /*RateContractor page*/
@@ -159,7 +167,7 @@ h4.green{
 }
 
 #relationship1, #relationship2, #relationship3, #relationship4, #recommend1, #recommend2, #rateit-reset-2{
-	margin: 5px;
+	margin: 5px 0;
 }
 
 #rateit-range-2{
@@ -171,11 +179,24 @@ h4.green{
 }
 
 
+/*GOOGLE MAPS*/
+#map-canvas {
+	 height: 400px; 
+	 width: 848px; 
+	 padding: 0;
+}
 
+.ads-separator{
+	margin: 10px 10px 10px 30px;
+}
 
+/*Profile page*/
 
-
-
+.profile-user-review{
+    margin-bottom: 25px;
+    padding-left: 10px;
+    
+}
 
 
 
